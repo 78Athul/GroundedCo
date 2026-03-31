@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import RazorpayButton from './RazorpayButton'
+import Link from 'next/link'
 import { featuredProducts } from '@/data/products'
 
 function formatINR(amount: number): string {
@@ -43,12 +43,12 @@ function ProductCard({ product }: { product: (typeof featuredProducts)[number] }
             {formatINR(product.price)}
           </span>
 
-          <RazorpayButton
-            product={product}
-            className="font-sans text-xs tracking-[0.2em] uppercase bg-deep-obsidian text-wool-white px-8 py-3 hover:bg-muted-earth transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          <Link
+            href={`/checkout/${product.id}`}
+            className="font-sans text-xs tracking-[0.2em] uppercase bg-deep-obsidian text-wool-white px-8 py-3 hover:bg-muted-earth transition-colors duration-300"
           >
             Try It Out
-          </RazorpayButton>
+          </Link>
         </div>
       </div>
     </div>
@@ -78,18 +78,17 @@ export default function TryItOutSection() {
           ))}
         </div>
 
-        {/* Razorpay trust badge */}
+        {/* Trust badge */}
         <div className="mt-12 flex items-center justify-center gap-3">
           <svg className="w-5 h-5 text-wool-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
           </svg>
           <span className="font-sans text-wool-white/40 text-xs tracking-widest uppercase">
-            Secure Payments by Razorpay
+            Secure Checkout · Free Shipping · 30-Day Returns
           </span>
-          {/* Razorpay wordmark (text fallback — replace with official SVG if needed) */}
-          <span className="font-sans text-[#3395FF] text-xs font-semibold tracking-tight">Razorpay</span>
         </div>
       </div>
     </section>
   )
 }
+

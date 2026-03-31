@@ -19,6 +19,21 @@ export interface FeaturedProduct {
   price: number        // INR, full rupees
   image: string
   badge?: string
+  // Extended details for checkout
+  description: string
+  material: string
+  dimensions: string
+  weight: string
+  origin: string
+  technique: string
+  pileHeight: string
+  careInstructions: string[]
+  features: string[]
+  delivery: {
+    estimate: string
+    shippingCost: string
+    returnPolicy: string
+  }
 }
 
 export const carouselProducts: CarouselProduct[] = [
@@ -110,6 +125,32 @@ export const featuredProducts: FeaturedProduct[] = [
     price: 24999,
     image: 'https://images.unsplash.com/photo-1600166898405-da9535204843?w=800&q=90&fm=webp',
     badge: 'Best Seller',
+    description: 'A masterpiece of traditional craftsmanship, the Atlas Hand-Knotted rug is woven by skilled artisans using time-honoured techniques passed down through generations. Each knot is tied by hand, resulting in a rug of extraordinary durability and beauty that will last for decades.',
+    material: 'Pure New Zealand Wool',
+    dimensions: '200 × 300 cm (6.6 × 9.8 ft)',
+    weight: '12.5 kg',
+    origin: 'Handcrafted in Rajasthan, India',
+    technique: 'Hand-Knotted (120 knots per sq. inch)',
+    pileHeight: '12 mm',
+    careInstructions: [
+      'Professional dry cleaning recommended',
+      'Vacuum regularly without beater bar',
+      'Blot spills immediately with a dry cloth',
+      'Rotate every 6 months for even wear',
+      'Avoid direct sunlight to preserve colour',
+    ],
+    features: [
+      'GoodWeave® certified — no child labour',
+      'Natural, undyed wool with vegetable-dyed accents',
+      'Anti-slip backing included',
+      'Moth and stain resistant treatment',
+      'Comes with complimentary rug pad',
+    ],
+    delivery: {
+      estimate: '5–7 business days (Metro cities) · 8–12 business days (Rest of India)',
+      shippingCost: 'Free shipping across India',
+      returnPolicy: '30-day no-questions-asked return policy. Free reverse pickup.',
+    },
   },
   {
     id: 'fp-ember',
@@ -118,5 +159,32 @@ export const featuredProducts: FeaturedProduct[] = [
     price: 12499,
     image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=90&fm=webp',
     badge: 'New Arrival',
+    description: 'The Ember Flatweave brings a contemporary edge to any room with its clean lines and earthy palette. Woven on traditional handlooms using a blend of cotton and jute, it offers a lightweight yet durable foundation perfect for modern living spaces.',
+    material: '60% Cotton, 40% Natural Jute',
+    dimensions: '160 × 230 cm (5.2 × 7.5 ft)',
+    weight: '6.8 kg',
+    origin: 'Handwoven in Varanasi, India',
+    technique: 'Flatweave (Dhurrie style)',
+    pileHeight: '4 mm (Low pile)',
+    careInstructions: [
+      'Machine washable on gentle cycle (cold water)',
+      'Air dry flat — do not tumble dry',
+      'Vacuum both sides regularly',
+      'Spot clean with mild detergent',
+      'Can be dry cleaned if preferred',
+    ],
+    features: [
+      'Reversible design — two looks in one',
+      'Eco-friendly natural fibres',
+      'Hypoallergenic and pet friendly',
+      'Lightweight and easy to move',
+      'Non-toxic AZO-free dyes',
+    ],
+    delivery: {
+      estimate: '3–5 business days (Metro cities) · 6–10 business days (Rest of India)',
+      shippingCost: 'Free shipping across India',
+      returnPolicy: '30-day no-questions-asked return policy. Free reverse pickup.',
+    },
   },
 ]
+

@@ -23,7 +23,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(order)
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown error'
+    const rzpErr = err as { error?: { description?: string } }
+    const message = err instanceof Error
+      ? err.message
+      : rzpErr?.error?.description ?? 'Unknown error'
     return NextResponse.json({ error: message }, { status: 500 })
   }
 }

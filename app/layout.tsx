@@ -1,17 +1,25 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Inter } from 'next/font/google'
+import { Exo, Macondo, Merriweather } from 'next/font/google'
 import './globals.css'
 
-const cormorant = Cormorant_Garamond({
+const exo = Exo({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-cormorant',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-exo',
   display: 'swap',
 })
 
-const inter = Inter({
+const macondo = Macondo({
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: ['400'],
+  variable: '--font-macondo',
+  display: 'swap',
+})
+
+const merriweather = Merriweather({
+  subsets: ['latin'],
+  weight: ['300', '400', '700'],
+  variable: '--font-merriweather',
   display: 'swap',
 })
 
@@ -26,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang="en" className={`${exo.variable} ${macondo.variable} ${merriweather.variable}`}>
       <body>{children}</body>
     </html>
   )
