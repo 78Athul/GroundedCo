@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "Bash(bash \"/c/Users/78ath/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.6/skills/brainstorming/scripts/start-server.sh\" --project-dir \"/c/Users/78ath/Desktop/Grounded\")",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes --name grounded)",
+      "Bash(npx create-next-app@latest --help)",
+      "Read(//c/Users/78ath/Desktop/**)",
+      "Bash(npx create-next-app@latest grounded-tmp --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes --disable-git)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes --no-git)",
+      "Bash(npx create-next-app@latest grounded-temp --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(gh api:*)",
+      "Bash(mv grounded-temp/node_modules .)",
+      "Bash(mv grounded-temp/package-lock.json .)",
+      "Bash(mv grounded-temp/package.json .)",
+      "Bash(mv grounded-temp/tsconfig.json .)",
+      "Bash(mv grounded-temp/next.config.ts .)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)"
+    ]
+  }
+}
