@@ -1,0 +1,74 @@
+<h2>Where should a carousel card tap lead on mobile?</h2>
+<p class="subtitle">Right now: tapping a card opens a modal with photos + review — but no way to buy. Users are stuck. Pick the intended tap destination.</p>
+
+<style>
+  .flow-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:8px; }
+  .flow-step { background:#fefae0; border:1.5px solid #01472e22; border-radius:12px; padding:10px 14px; font-size:13px; font-weight:600; color:#01472e; white-space:nowrap; }
+  .flow-step.dead { background:#fee2e2; border-color:#f87171; color:#b91c1c; }
+  .flow-step.buy { background:#dcfce7; border-color:#4ade80; color:#15803d; }
+  .flow-arrow { font-size:18px; color:#01472e66; }
+  .badge { display:inline-block; font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:2px 8px; border-radius:20px; margin-left:6px; }
+  .badge.now { background:#fef3c7; color:#92400e; }
+  .badge.fix { background:#d1fae5; color:#065f46; }
+</style>
+
+<div class="section">
+  <h3>Current flow <span class="badge now">Broken</span></h3>
+  <div class="flow-row">
+    <div class="flow-step">Tap carousel card</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">Modal opens (photos + review)</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step dead">Dead end — no buy button</div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Modal → then Buy</h3>
+      <p>Tap card → modal opens (studio photo, UGC photo, review) → "Bring It Home" CTA button at the bottom leads to checkout.<br><br><strong>Best for:</strong> keeping the product storytelling intact — customers see proof before buying.</p>
+      <div class="flow-row" style="margin-top:10px">
+        <div class="flow-step">Tap card</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Modal</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step buy">Checkout ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Tap card → go directly to Checkout</h3>
+      <p>On mobile, carousel cards skip the modal entirely and navigate straight to the checkout page. The modal remains desktop-only.<br><br><strong>Best for:</strong> fast path to purchase — fewer taps, less friction on small screens.</p>
+      <div class="flow-row" style="margin-top:10px">
+        <div class="flow-step">Tap card</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step buy">Checkout directly ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Both — modal + in-modal Buy + direct CTA card</h3>
+      <p>Modal stays as-is with a Buy CTA added. Product cards in the "Try It Out" section (below carousel) already have "Bring It Home" — keep them as the primary purchase path. Carousel is browse-only.<br><br><strong>Best for:</strong> separating browse intent (carousel) from buy intent (product cards).</p>
+      <div class="flow-row" style="margin-top:10px">
+        <div class="flow-step">Carousel tap</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">Modal (browse)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step buy">Checkout ✓</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-step">"Bring It Home" card</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step buy">Checkout directly ✓</div>
+      </div>
+    </div>
+  </div>
+</div>

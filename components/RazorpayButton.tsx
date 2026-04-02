@@ -63,7 +63,7 @@ export default function RazorpayButton({ product, className = '', children }: Ra
           product_id: product.id,
         },
         theme: {
-          color: '#BDA182',
+          color: '#01472e',
         },
         modal: {
           ondismiss: () => setLoading(false),

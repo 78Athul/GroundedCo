@@ -1,31 +1,26 @@
 import type { Metadata } from 'next'
-import { Exo, Macondo, Merriweather } from 'next/font/google'
+import { Anton, Inter } from 'next/font/google'
 import './globals.css'
+import { ThemeProvider } from '@/components/ThemeProvider'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
-const exo = Exo({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-exo',
-  display: 'swap',
-})
-
-const macondo = Macondo({
+const anton = Anton({
   subsets: ['latin'],
   weight: ['400'],
-  variable: '--font-macondo',
+  variable: '--font-anton',
   display: 'swap',
 })
 
-const merriweather = Merriweather({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '700'],
-  variable: '--font-merriweather',
+  weight: ['400', '700'],
+  variable: '--font-inter',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: 'Grounded — Foundation for Fine Living',
-  description: 'Premium hand-crafted rugs and carpets for the discerning home.',
+  title: 'Grounded — Handcrafted Rugs Rooted in Tradition',
+  description: 'Handcrafted rugs and carpets woven by master artisans across India. Natural fibres, time-honoured techniques, and designs that ground your home in warmth and character.',
 }
 
 export default function RootLayout({
@@ -34,8 +29,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${exo.variable} ${macondo.variable} ${merriweather.variable}`}>
-      <body>{children}</body>
+    <html lang="en" className={`${anton.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body>
+        {children}
+        {/* Noise texture overlay — real element so pointer-events: none actually works on mobile */}
+        <div className="noise-overlay" aria-hidden="true" />
+        <ThemeToggle />
+      </body>
     </html>
   )
 }
