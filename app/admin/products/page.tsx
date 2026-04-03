@@ -61,13 +61,20 @@ export default function AdminProductsPage() {
 
   const saveProduct = async (p: ProductRow) => {
     const { id, ...rest } = p
-    if (id) {
-      await supabase.from('featured_products').update(rest).eq('id', id)
-    } else {
-      await supabase.from('featured_products').insert(rest)
+    try {
+      if (id) {
+        const { error } = await supabase.from('featured_products').update(rest).eq('id', id)
+        if (error) throw error
+      } else {
+        const { error } = await supabase.from('featured_products').insert(rest)
+        if (error) throw error
+      }
+      setEditing(null)
+      fetchProducts()
+    } catch (err: any) {
+      console.error('Save failed:', err)
+      alert('Failed to save product: ' + err.message)
     }
-    setEditing(null)
-    fetchProducts()
   }
 
   const newProduct = (): ProductRow => ({
@@ -119,8 +126,8 @@ export default function AdminProductsPage() {
           {/* Left: image + inventory */}
           <div className="space-y-6">
             <div>
-              <label className="block font-sans font-bold text-forest/50 text-xs tracking-[0.15em] uppercase mb-2">Product Image</label>
-              <ImageUpload currentUrl={editing.image} onUpload={(url) => setEditing({ ...editing, image: url })} folder="featured" />
+              <label className="block font-sans font-bold text-forest/50 text-xs tracking-[0.15em] uppercase mb-2">Product Image (4:3)</label>
+              <ImageUpload currentUrl={editing.image} onUpload={(url) => setEditing({ ...editing, image: url })} folder="featured" aspect={4/3} />
             </div>
 
             {/* Gallery Photos */}
@@ -149,12 +156,13 @@ export default function AdminProductsPage() {
               )}
 
               <div>
-                <label className="block font-sans font-bold text-forest/50 text-xs tracking-[0.15em] uppercase mb-2">+ Add Photo</label>
+                <label className="block font-sans font-bold text-forest/50 text-xs tracking-[0.15em] uppercase mb-2">+ Add Photo (1:1)</label>
                 <ImageUpload
                   currentUrl=""
                   onUpload={(url) => setEditing({ ...editing, photos: [...editing.photos, url] })}
                   folder="featured"
                   resetAfterUpload
+                  aspect={1}
                 />
               </div>
             </div>

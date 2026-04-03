@@ -58,9 +58,9 @@ export default function TryItOutSection({ products }: TryItOutSectionProps) {
 
         {/* Heading */}
         <div className="mb-16 text-center">
-          <p className="font-sans font-bold text-sage text-xs tracking-[0.2em] uppercase mb-4">Why Grounded Try Out</p>
+          <p className="font-sans font-bold text-sage text-xs tracking-[0.2em] uppercase mb-4">Live With It</p>
           <h2 className="font-display text-cream text-[15vw] md:text-[10vw] leading-[0.8] uppercase tracking-tighter mix-blend-overlay">
-            Why Grounded Try Out
+            Live With it
           </h2>
         </div>
 
@@ -72,10 +72,10 @@ export default function TryItOutSection({ products }: TryItOutSectionProps) {
                 By Selection Only
               </h4>
               <p className="font-sans text-cream/70 text-sm leading-relaxed">
-                To mark our birth, we are releasing ten masterpieces: five of Maya, five of Nila. This is a private invitation to host a legacy.
+                To complete our first 100 bespoke orders, we are releasing ten singular masterpieces: five of മായ and five of നില.
               </p>
             </div>
-            
+
             <div className="flex flex-col gap-4">
               <h4 className="font-sans font-bold text-sage text-xs tracking-[0.2em] uppercase border-b border-sage/20 pb-4">
                 The Gravity of Five
@@ -94,7 +94,7 @@ export default function TryItOutSection({ products }: TryItOutSectionProps) {
               </p>
             </div>
           </div>
-          
+
           <div className="text-center border border-sage/30 rounded-full py-6 px-8 max-w-lg mx-auto bg-sage/5 backdrop-blur-sm relative overflow-hidden group">
             <div className="absolute inset-0 bg-sage/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             <p className="relative z-10 font-sans font-bold text-cream text-xs md:text-sm tracking-[0.2em] uppercase">

@@ -27,7 +27,33 @@ export default async function CheckoutPage({
   }
 
   return (
-    <main className="min-h-screen bg-wool-white">
+    <main className="min-h-screen bg-wool-white relative overflow-hidden">
+      {/* Animated green lines background */}
+      <div aria-hidden="true" className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox="0 0 1440 900"
+          preserveAspectRatio="xMidYMid slice"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g className="checkout-line-1">
+            <path d="M -80,180 C 200,130 480,260 780,210 S 1150,100 1520,200" stroke="#01472e" strokeWidth="1" opacity="0.07" />
+          </g>
+          <g className="checkout-line-2">
+            <path d="M -80,430 C 250,380 520,500 820,440 S 1180,360 1520,450" stroke="#01472e" strokeWidth="1.2" opacity="0.06" />
+          </g>
+          <g className="checkout-line-3">
+            <path d="M 180,-40 C 130,180 280,380 170,580 S 60,760 210,920" stroke="#01472e" strokeWidth="1" opacity="0.06" />
+          </g>
+          <g className="checkout-line-4">
+            <path d="M -80,680 C 300,630 600,740 920,670 S 1260,600 1520,660" stroke="#01472e" strokeWidth="0.8" opacity="0.05" />
+          </g>
+          <g className="checkout-line-5">
+            <path d="M 860,-40 C 920,160 770,340 870,540 S 1020,710 910,920" stroke="#01472e" strokeWidth="1" opacity="0.06" />
+          </g>
+        </svg>
+      </div>
       {/* Top navigation bar */}
       <nav className="sticky top-0 z-50 bg-wool-white/80 backdrop-blur-md border-b border-deep-obsidian/10">
         <div className="max-w-7xl mx-auto px-6 md:px-16 flex items-center justify-between h-16">
@@ -124,43 +150,19 @@ export default async function CheckoutPage({
 
       {/* Bottom trust section */}
       <section className="bg-deep-obsidian py-16">
-        <div className="max-w-7xl mx-auto px-6 md:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {[
-              {
-                icon: (
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                  </svg>
-                ),
-                title: 'Authenticity Guaranteed',
-                desc: 'Every rug comes with a certificate of authenticity and a unique serial number traceable to its artisan.',
-              },
-              {
-                icon: (
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.078-.502 1.078-1.121a.997.997 0 00-.222-.626l-2.847-3.37a1.5 1.5 0 00-1.134-.513H13.5m-3 4.5V6.75a.75.75 0 01.75-.75h5.507a1.5 1.5 0 011.29.743l2.86 4.771A1.5 1.5 0 0121 12.115V14.25" />
-                  </svg>
-                ),
-                title: 'Free White-Glove Delivery',
-                desc: 'Professional unrolling and placement in your room of choice. We even take the packaging away.',
-              },
-              {
-                icon: (
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
-                  </svg>
-                ),
-                title: '30-Day Free Returns',
-                desc: 'Live with it for a month. If it doesn\'t feel right, we\'ll pick it up at no cost — no questions asked.',
-              },
-            ].map((item) => (
-              <div key={item.title} className="text-center">
-                <div className="text-muted-earth mb-4 flex justify-center">{item.icon}</div>
-                <h3 className="font-serif text-wool-white text-xl font-light mb-2">{item.title}</h3>
-                <p className="font-sans text-wool-white/50 text-sm leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
+        <div className="max-w-7xl mx-auto px-6 md:px-16 flex justify-center">
+          <div className="max-w-md text-center">
+            <div className="text-muted-earth mb-4 flex justify-center">
+              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.078-.502 1.078-1.121a.997.997 0 00-.222-.626l-2.847-3.37a1.5 1.5 0 00-1.134-.513H13.5m-3 4.5V6.75a.75.75 0 01.75-.75h5.507a1.5 1.5 0 011.29.743l2.86 4.771A1.5 1.5 0 0121 12.115V14.25" />
+              </svg>
+            </div>
+            <h3 className="font-serif text-wool-white text-2xl font-light mb-3">
+              Free Delivery Across Keralam
+            </h3>
+            <p className="font-sans text-wool-white/60 text-sm leading-relaxed">
+              Complimentary shipping to any home in Keralam. Professional unrolling and placement in your room of choice.
+            </p>
           </div>
         </div>
       </section>

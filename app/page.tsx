@@ -4,7 +4,7 @@ import TryItOutSection  from '@/components/TryItOutSection'
 import SubFooter        from '@/components/SubFooter'
 import { getCarouselProducts, getFeaturedProducts } from '@/data/products'
 
-export const revalidate = 60 // Rebuild page every 60 seconds if data changes
+export const revalidate = 0 // Disable cache temporarily while editing
 
 export default async function Home() {
   const [carouselProducts, featuredProducts] = await Promise.all([

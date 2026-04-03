@@ -28,10 +28,18 @@ export default function SubFooter() {
           ))}
         </nav>
 
-        {/* Copyright */}
-        <span className="font-sans font-bold text-forest/30 text-xs tracking-wide">
-          © {year} Grounded. All rights reserved.
-        </span>
+        {/* Copyright + Admin */}
+        <div className="flex items-center gap-4">
+          <span className="font-sans font-bold text-forest/30 text-xs tracking-wide">
+            © {year} Grounded. All rights reserved.
+          </span>
+          <a
+            href="/admin/login"
+            className="font-sans font-bold text-forest/20 text-xs tracking-[0.2em] uppercase hover:text-forest/50 transition-colors duration-200"
+          >
+            Admin
+          </a>
+        </div>
       </div>
     </footer>
   )

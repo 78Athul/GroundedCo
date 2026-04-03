@@ -10,18 +10,12 @@ const navItems = [
   { href: '/admin',          label: 'Dashboard', icon: '◈' },
   { href: '/admin/carousel', label: 'Carousel',  icon: '◎' },
   { href: '/admin/products', label: 'Products',  icon: '▣' },
+  { href: '/admin/pages',    label: 'Pages',     icon: '◧' },
   { href: '/admin/users',    label: 'Users',     icon: '◉' },
 ]
 
 function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname()
-  const router = useRouter()
-
-  const handleLogout = async () => {
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    router.push('/admin/login')
-  }
 
   return (
     <>
@@ -55,22 +49,34 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         })}
       </nav>
 
-      {/* Footer */}
-      <div className="px-4 py-6 border-t border-cream/10 space-y-2">
-        <Link
-          href="/"
-          className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-sans text-cream/40 hover:text-cream hover:bg-cream/5 transition-colors"
-        >
-          ← View Store
-        </Link>
-        <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-sans text-cream/40 hover:text-red-300 hover:bg-red-500/10 transition-colors text-left"
-        >
-          Sign Out
-        </button>
-      </div>
     </>
+  )
+}
+
+function TopRightBar() {
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push('/admin/login')
+  }
+
+  return (
+    <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+      <Link
+        href="/"
+        className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-sans font-bold tracking-wide text-cream/60 bg-forest/80 hover:text-cream hover:bg-forest border border-cream/10 transition-colors"
+      >
+        ← View Store
+      </Link>
+      <button
+        onClick={handleLogout}
+        className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-sans font-bold tracking-wide text-cream/60 bg-forest/80 hover:text-red-300 hover:bg-red-500/20 border border-cream/10 transition-colors"
+      >
+        Sign Out
+      </button>
+    </div>
   )
 }
 
@@ -79,6 +85,9 @@ export default function AdminSidebar() {
 
   return (
     <>
+      {/* Top-right action bar */}
+      <TopRightBar />
+
       {/* Desktop sidebar — always visible on lg+ */}
       <aside className="hidden lg:flex w-64 min-h-screen bg-forest text-cream flex-col shrink-0">
         <SidebarContent />

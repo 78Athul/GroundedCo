@@ -83,9 +83,9 @@ export default function AnimatedTextCycle({
       </div>
 
       {/* Visible animated word */}
-      <motion.span 
-        className="relative inline-block"
-        animate={{ 
+      <motion.span
+        className="relative inline-flex justify-center"
+        animate={{
           width,
           transition: { 
             type: "spring",

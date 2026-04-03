@@ -16,10 +16,10 @@ index f94d040..25a89d1 100644
          {/* Heading */}
          <div className="mb-16 text-center">
 -          <p className="font-sans font-bold text-sage text-xs tracking-[0.2em] uppercase mb-4">Live With It</p>
-+          <p className="font-sans font-bold text-sage text-xs tracking-[0.2em] uppercase mb-4">Why Grounded Try Out</p>
++          <p className="font-sans font-bold text-sage text-xs tracking-[0.2em] uppercase mb-4">Live with it Out</p>
            <h2 className="font-display text-cream text-[15vw] md:text-[10vw] leading-[0.8] uppercase tracking-tighter mix-blend-overlay">
 -            Live With It
-+            Why Grounded Try Out
++            Live With It
            </h2>
          </div>
  

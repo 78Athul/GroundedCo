@@ -19,7 +19,7 @@ function formatINR(amount: number): string {
 export default function AnimatedPrice({ price, discount = 1.3 }: AnimatedPriceProps) {
   const originalPrice = Math.round(price * discount)
   const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const isInView = useInView(ref, { once: true })
 
   // Animate displayed number from full (original) price → sale price
   const count = useMotionValue(originalPrice)
@@ -48,10 +48,10 @@ export default function AnimatedPrice({ price, discount = 1.3 }: AnimatedPricePr
     <motion.div
       ref={ref}
       id="pricing"
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true }}
       className="mb-6 pb-6 border-b border-deep-obsidian/10"
     >
       {/* Label */}

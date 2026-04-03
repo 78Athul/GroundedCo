@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Anton, Inter } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/ThemeProvider'
-import { ThemeToggle } from '@/components/ThemeToggle'
 
 const anton = Anton({
   subsets: ['latin'],
@@ -29,12 +27,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${anton.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${anton.variable} ${inter.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
         {children}
         {/* Noise texture overlay — real element so pointer-events: none actually works on mobile */}
         <div className="noise-overlay" aria-hidden="true" />
-        <ThemeToggle />
       </body>
     </html>
   )

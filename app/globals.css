@@ -84,14 +84,6 @@
 }
 
 @layer base {
-  html[data-theme="maroon"] {
-    --color-forest: #800000;
-    --color-maroon: #01472e;
-    --color-sage: #eaa6a6;
-    --color-olive: #f2cece;
-    --color-moss: #a85858;
-  }
-
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
@@ -109,6 +101,8 @@
   pointer-events: none;
   z-index: 1;
   opacity: 0.04;
+  transform: translateZ(0);
+  will-change: transform;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
@@ -131,6 +125,34 @@
 .carousel-track:hover {
   animation-play-state: paused;
 }
+
+/* ─── Checkout Background Lines ─────────────────────── */
+@keyframes line-drift-1 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%       { transform: translateY(-28px) translateX(12px); }
+}
+@keyframes line-drift-2 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%       { transform: translateY(22px) translateX(-10px); }
+}
+@keyframes line-drift-3 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%       { transform: translateY(-18px) translateX(-14px); }
+}
+@keyframes line-drift-4 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%       { transform: translateY(32px) translateX(8px); }
+}
+@keyframes line-drift-5 {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%       { transform: translateY(-24px) translateX(18px); }
+}
+
+.checkout-line-1 { animation: line-drift-1 22s ease-in-out infinite; }
+.checkout-line-2 { animation: line-drift-2 28s ease-in-out infinite; }
+.checkout-line-3 { animation: line-drift-3 19s ease-in-out infinite; }
+.checkout-line-4 { animation: line-drift-4 25s ease-in-out infinite; }
+.checkout-line-5 { animation: line-drift-5 31s ease-in-out infinite; }
 
 /* ─── Price Strikethrough ───────────────────────────── */
 .price-strike {
