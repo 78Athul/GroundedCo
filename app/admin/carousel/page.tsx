@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
 import ImageUpload from '@/components/admin/ImageUpload'
@@ -25,16 +25,35 @@ export default function AdminCarouselPage() {
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
-  const fetchItems = useCallback(async () => {
+  const fetchItems = async () => {
     const { data } = await supabase
       .from('carousel_products')
       .select('*')
       .order('sort_order', { ascending: true })
     setItems(data ?? [])
     setLoading(false)
-  }, [supabase])
+  }
 
-  useEffect(() => { fetchItems() }, [fetchItems])
+  useEffect(() => {
+    let active = true
+
+    const load = async () => {
+      const { data } = await supabase
+        .from('carousel_products')
+        .select('*')
+        .order('sort_order', { ascending: true })
+
+      if (!active) return
+      setItems(data ?? [])
+      setLoading(false)
+    }
+
+    load()
+
+    return () => {
+      active = false
+    }
+  }, [supabase])
 
   const toggleVisibility = async (item: CarouselRow) => {
     await supabase.from('carousel_products').update({ is_visible: !item.is_visible }).eq('id', item.id)

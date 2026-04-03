@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
 import ImageUpload from '@/components/admin/ImageUpload'
@@ -37,16 +37,33 @@ export default function AdminProductsPage() {
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
-  const fetchProducts = useCallback(async () => {
+  const fetchProducts = async () => {
     const { data } = await supabase
       .from('featured_products')
       .select('*')
       .order('sort_order', { ascending: true })
     setProducts(data ?? [])
     setLoading(false)
-  }, [supabase])
+  }
 
-  useEffect(() => { fetchProducts() }, [fetchProducts])
+  useEffect(() => {
+    let active = true
+
+    const load = async () => {
+      const { data } = await supabase
+        .from('featured_products')
+        .select('*')
+        .order('sort_order', { ascending: true })
+
+      if (!active) return
+      setProducts(data ?? [])
+      setLoading(false)
+    }
+
+    load()
+
+    return () => { active = false }
+  }, [supabase])
 
   const toggleVisibility = async (p: ProductRow) => {
     await supabase.from('featured_products').update({ is_visible: !p.is_visible }).eq('id', p.id)
@@ -71,9 +88,10 @@ export default function AdminProductsPage() {
       }
       setEditing(null)
       fetchProducts()
-    } catch (err: any) {
-      console.error('Save failed:', err)
-      alert('Failed to save product: ' + err.message)
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error('Unknown error')
+      console.error('Save failed:', error)
+      alert('Failed to save product: ' + error.message)
     }
   }
 

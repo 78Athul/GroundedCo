@@ -93,8 +93,10 @@ export default function ScrollSequenceHero() {
     // Remaining frames in idle chunks
     let next = EAGER
     function loadChunk(deadline?: IdleDeadline) {
-      while (next < FRAME_COUNT && (!deadline || deadline.timeRemaining() > 0)) {
+      let scanned = 0
+      while (next < FRAME_COUNT && scanned < CHUNK && (!deadline || deadline.timeRemaining() > 0)) {
         loadFrame(next++)
+        scanned += 1
       }
       if (next < FRAME_COUNT) {
         if (typeof requestIdleCallback !== 'undefined') {

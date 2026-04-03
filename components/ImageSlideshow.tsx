@@ -36,7 +36,11 @@ export default function ImageSlideshow({ images, alt, badge }: ImageSlideshowPro
     const dy = e.changedTouches[0].clientY - touchStartY.current
     // Only trigger if horizontal swipe is dominant and large enough
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-      dx < 0 ? next() : prev()
+      if (dx < 0) {
+        next()
+      } else {
+        prev()
+      }
     }
     touchStartX.current = null
     touchStartY.current = null

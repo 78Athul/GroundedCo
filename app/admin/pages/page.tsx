@@ -41,18 +41,22 @@ export default function AdminPagesPage() {
   const [saved, setSaved] = useState(false)
 
   useEffect(() => {
+    let active = true
+
     supabase.from('contact_settings').select('*').limit(1).single()
-      .then(({ data }) => { if (data) setContact(data) })
+      .then(({ data }) => { if (active && data) setContact(data) })
 
     supabase.from('site_pages').select('*').in('slug', ['privacy', 'shipping'])
       .then(({ data }) => {
-        if (!data) return
+        if (!active || !data) return
         const p = data.find((r) => r.slug === 'privacy')
         const s = data.find((r) => r.slug === 'shipping')
         if (p) setPrivacy(p)
         if (s) setShipping(s)
       })
-  }, [])
+
+    return () => { active = false }
+  }, [supabase])
 
   const saveContact = async () => {
     setSaving(true)

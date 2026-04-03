@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 interface Profile {
@@ -19,16 +19,33 @@ export default function AdminUsersPage() {
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
 
-  const fetchUsers = useCallback(async () => {
+  const fetchUsers = async () => {
     const { data } = await supabase
       .from('profiles')
       .select('*')
       .order('created_at', { ascending: false })
     setUsers(data ?? [])
     setLoading(false)
-  }, [supabase])
+  }
 
-  useEffect(() => { fetchUsers() }, [fetchUsers])
+  useEffect(() => {
+    let active = true
+
+    const load = async () => {
+      const { data } = await supabase
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (!active) return
+      setUsers(data ?? [])
+      setLoading(false)
+    }
+
+    load()
+
+    return () => { active = false }
+  }, [supabase])
 
   const toggleRole = async (user: Profile) => {
     const newRole = user.role === 'admin' ? 'user' : 'admin'

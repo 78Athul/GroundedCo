@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, Suspense } from 'react'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { useSearchParams } from 'next/navigation'
 
@@ -92,7 +93,7 @@ function AdminLogin() {
         </form>
 
         <p className="text-center font-sans text-cream/20 text-xs mt-6">
-          <a href="/" className="hover:text-cream/50 transition-colors">← Back to store</a>
+          <Link href="/" className="hover:text-cream/50 transition-colors">← Back to store</Link>
         </p>
       </div>
     </div>

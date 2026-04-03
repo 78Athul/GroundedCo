@@ -6,14 +6,6 @@ import ImageSlideshow from '@/components/ImageSlideshow'
 import AnimatedPrice from '@/components/AnimatedPrice'
 import CareGuideClient from '@/components/CareGuideClient'
 
-function formatINR(amount: number): string {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0,
-  }).format(amount)
-}
-
 export default async function CheckoutPage({
   params,
 }: {
@@ -161,7 +153,7 @@ export default async function CheckoutPage({
               We Deliver It Ourselves, Across Keralam
             </h3>
             <p className="font-sans text-wool-white/60 text-sm leading-relaxed mb-4">
-              If you're in Keralam, we don't hand this off to a courier. We bring it to your door ourselves, carefully rolled, personally carried, and placed exactly where you want it.
+              If you&apos;re in Keralam, we don&apos;t hand this off to a courier. We bring it to your door ourselves, carefully rolled, personally carried, and placed exactly where you want it.
             </p>
             <p className="font-sans text-muted-earth text-xs tracking-[0.15em] uppercase">
               Complimentary · No third-party handling · Your room, your way

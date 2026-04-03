@@ -144,7 +144,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                     <StarRating rating={product.review.rating} />
 
                     <blockquote className="font-display text-forest text-2xl uppercase tracking-tighter leading-snug mt-2 opacity-90">
-                      "{product.review.text}"
+                      &ldquo;{product.review.text}&rdquo;
                     </blockquote>
 
                     <div className="mt-auto pt-6 border-t border-forest/10">
