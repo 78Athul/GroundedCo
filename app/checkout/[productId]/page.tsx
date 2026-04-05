@@ -96,16 +96,16 @@ export default async function CheckoutPage({
           </div>
 
           {/* Right: Product details */}
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             {/* Breadcrumb */}
             <p className="font-sans text-muted-earth text-xs tracking-[0.25em] uppercase mb-4">
               Checkout · {product.badge ?? 'Featured'}
             </p>
 
-            <h1 className="font-serif text-deep-obsidian text-4xl md:text-5xl font-light leading-tight mb-2">
+            <h1 className="font-serif text-deep-obsidian font-light leading-tight mb-2" style={{ fontSize: 'clamp(1.875rem, 5vw, 3rem)' }}>
               {product.name}
             </h1>
-            <p className="font-sans text-deep-obsidian/50 text-sm mb-6">{product.subtitle}</p>
+            <p className="font-sans text-deep-obsidian/50 text-sm mb-4">{product.subtitle}</p>
 
             {/* Animated Price */}
             <AnimatedPrice price={product.price} />
@@ -116,7 +116,7 @@ export default async function CheckoutPage({
             </p>
 
             {/* Quick Specs Grid */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               {[
                 { label: 'Material', value: product.material },
                 { label: 'Dimensions', value: product.dimensions },

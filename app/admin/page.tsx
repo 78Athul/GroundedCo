@@ -2,25 +2,44 @@ import { createServerClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
 
-export default async function AdminDashboard() {
-  const supabase = createServerClient()
+type LowStockProduct = {
+  id: string
+  name: string
+  stock_count: number
+  low_stock_threshold: number
+}
 
-  // Fetch counts in parallel
-  const [carouselRes, featuredRes, profilesRes, lowStockRes] = await Promise.all([
-    supabase.from('carousel_products').select('id', { count: 'exact', head: true }),
-    supabase.from('featured_products').select('id', { count: 'exact', head: true }),
-    supabase.from('profiles').select('id', { count: 'exact', head: true }),
-    supabase.from('featured_products').select('id, name, stock_count, low_stock_threshold').lte('stock_count', 5),
-  ])
+export default async function AdminDashboard() {
+  let carouselCount = 0
+  let featuredCount = 0
+  let profilesCount = 0
+  let lowStockProducts: LowStockProduct[] = []
+
+  try {
+    const supabase = createServerClient()
+
+    // Fetch counts in parallel
+    const [carouselRes, featuredRes, profilesRes, lowStockRes] = await Promise.all([
+      supabase.from('carousel_products').select('id', { count: 'exact', head: true }),
+      supabase.from('featured_products').select('id', { count: 'exact', head: true }),
+      supabase.from('profiles').select('id', { count: 'exact', head: true }),
+      supabase.from('featured_products').select('id, name, stock_count, low_stock_threshold').lte('stock_count', 5),
+    ])
+
+    carouselCount = carouselRes.count ?? 0
+    featuredCount = featuredRes.count ?? 0
+    profilesCount = profilesRes.count ?? 0
+    lowStockProducts = lowStockRes.data ?? []
+  } catch (err) {
+    console.error('AdminDashboard(): Supabase fetch failed', err)
+  }
 
   const stats = [
-    { label: 'Carousel Items',    value: carouselRes.count ?? 0, color: 'bg-sage/20 text-forest' },
-    { label: 'Featured Products', value: featuredRes.count ?? 0, color: 'bg-moss/20 text-forest' },
-    { label: 'Registered Users',  value: profilesRes.count ?? 0, color: 'bg-olive/40 text-forest' },
-    { label: 'Low Stock Alerts',  value: lowStockRes.data?.length ?? 0, color: lowStockRes.data?.length ? 'bg-red-100 text-red-700' : 'bg-sage/20 text-forest' },
+    { label: 'Carousel Items', value: carouselCount, color: 'bg-sage/20 text-forest' },
+    { label: 'Featured Products', value: featuredCount, color: 'bg-moss/20 text-forest' },
+    { label: 'Registered Users', value: profilesCount, color: 'bg-olive/40 text-forest' },
+    { label: 'Low Stock Alerts', value: lowStockProducts.length, color: lowStockProducts.length ? 'bg-red-100 text-red-700' : 'bg-sage/20 text-forest' },
   ]
-
-  const lowStockProducts = lowStockRes.data ?? []
 
   return (
     <div>

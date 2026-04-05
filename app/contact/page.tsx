@@ -87,7 +87,7 @@ export default async function ContactPage() {
               href={`https://wa.me/${contact.whatsapp.replace(/[^0-9]/g, '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative overflow-hidden rounded-2xl bg-[#eeeee4] p-10 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl"
+              className="group relative overflow-hidden rounded-2xl bg-cream shadow-lg shadow-forest/10 border border-deep-obsidian/5 p-10 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl"
             >
               {/* Forest fill slides up */}
               <div className="absolute inset-0 bg-forest translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-2xl" />
@@ -116,7 +116,7 @@ export default async function ContactPage() {
           {contact.email && (
             <a
               href={`mailto:${contact.email}`}
-              className="group relative overflow-hidden rounded-2xl bg-[#eeeee4] p-10 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl"
+              className="group relative overflow-hidden rounded-2xl bg-cream shadow-lg shadow-forest/10 border border-deep-obsidian/5 p-10 flex flex-col items-center text-center transition-all duration-500 hover:shadow-xl"
             >
               <div className="absolute inset-0 bg-forest translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] rounded-2xl" />
 

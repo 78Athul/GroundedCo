@@ -76,8 +76,8 @@ export default function AnimatedPrice({ price, discount = 1.3 }: AnimatedPricePr
       <div className="flex items-baseline gap-2 mt-2">
         <span className="font-sans text-deep-obsidian/50 text-sm font-medium">Now</span>
         <motion.span
-          className="font-display text-5xl sm:text-6xl leading-none tracking-tighter transition-colors duration-500"
-          style={{ color: isInView ? '#01472e' : '#1a1714' }}
+          className="font-display leading-none tracking-tighter transition-colors duration-500"
+          style={{ fontSize: 'clamp(2rem, 6vw, 3.75rem)', color: isInView ? '#01472e' : '#1a1714' }}
           data-testid="animated-price"
         >
           {formatINR(displayValue)}

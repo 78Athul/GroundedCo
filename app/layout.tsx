@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
-import { Anton, Heebo, Hind_Siliguri } from 'next/font/google'
+import { Anton, Heebo, Hind_Siliguri, Geist } from 'next/font/google'
 import './globals.css'
+import StaggeredMenu from '@/components/ui/staggered-menu'
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const anton = Anton({
   subsets: ['latin'],
@@ -34,8 +38,23 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${anton.variable} ${heebo.variable} ${hindSiliguri.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" className={cn(anton.variable, heebo.variable, hindSiliguri.variable, "font-sans", geist.variable)} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
+        <StaggeredMenu
+          isFixed
+          items={[
+            { label: 'Home', ariaLabel: 'Return home', link: '/' },
+            { label: 'Enter the Quiet', ariaLabel: 'Enter the Quiet experience', link: '/#enter-the-quiet' }
+          ]}
+          socialItems={[
+            { label: 'Instagram', link: 'https://instagram.com/grounded' },
+            { label: 'Twitter', link: 'https://twitter.com/grounded' },
+            { label: 'LinkedIn', link: 'https://linkedin.com/company/grounded' }
+          ]}
+          colors={['#01472e', '#a3b18a', '#fefae0']}
+          accentColor="#ccd5ae"
+          position="right"
+        />
         {children}
         {/* Noise texture overlay — real element so pointer-events: none actually works on mobile */}
         <div className="noise-overlay" aria-hidden="true" />

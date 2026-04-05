@@ -92,7 +92,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
 
                 {/* Panel 1: Studio Photo */}
                 <div className="p-8 flex flex-col gap-4">
-                  <p className="font-sans font-bold text-forest/50 text-xs tracking-[0.2em] uppercase">Studio Shot</p>
+                  <p className="font-sans font-bold text-forest/50 text-xs tracking-[0.2em] uppercase">Cad Design</p>
                   <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl mix-blend-darken">
                     <Image
                       src={product.studioImage}
@@ -105,8 +105,8 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 </div>
 
                 {/* Panel 2: UGC Photo */}
-                <div className="p-8 flex flex-col gap-4">In Their Home
-                  <p className="font-sans font-bold text-forest/50 text-xs tracking-[0.2em] uppercase"></p>
+                <div className="p-8 flex flex-col gap-4">
+                  <p className="font-sans font-bold text-forest/50 text-xs tracking-[0.2em] uppercase">Grounded in Living Spaces</p>
                   <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
                     <Image
                       src={product.ugcImage}
