@@ -91,7 +91,7 @@ export default function TryItOutSection({ products }: TryItOutSectionProps) {
   }, [])
 
   return (
-    <section className="py-24 bg-forest rounded-[5rem] mx-4 mb-24 shadow-2xl" id="try-it-out">
+    <section data-nav-theme="dark" className="py-24 bg-forest rounded-[5rem] mx-4 mb-24 shadow-2xl" id="try-it-out">
       <div className="max-w-6xl mx-auto px-6 md:px-12">
 
         {/* Heading */}

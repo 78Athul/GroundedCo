@@ -8,7 +8,7 @@ export default function SubFooter() {
   ]
 
   return (
-    <footer className="py-8 px-6 bg-transparent border-t border-forest/10">
+    <footer data-nav-theme="light" className="py-8 px-6 bg-transparent border-t border-forest/10">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Brand */}
         <span className="font-display text-forest/40 text-2xl uppercase tracking-tighter">

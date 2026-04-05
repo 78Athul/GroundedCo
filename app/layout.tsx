@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Anton, Heebo, Hind_Siliguri, Geist } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/Providers'
+import { AnimatedNav } from '@/components/AnimatedNav'
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -41,6 +42,7 @@ export default function RootLayout({
     <html lang="en" className={cn(anton.variable, heebo.variable, hindSiliguri.variable, "font-sans", geist.variable)} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
         <Providers>
+          <AnimatedNav />
           {children}
           {/* Noise texture overlay — real element so pointer-events: none actually works on mobile */}
           <div className="noise-overlay" aria-hidden="true" />

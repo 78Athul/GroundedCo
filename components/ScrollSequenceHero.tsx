@@ -171,6 +171,7 @@ export default function ScrollSequenceHero() {
   return (
     <section
       ref={sectionRef}
+      data-nav-theme="dark"
       style={{ height: `calc(${SEQUENCE_HEIGHT}px + 100vh)` }}
       className="relative"
     >

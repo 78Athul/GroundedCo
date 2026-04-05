@@ -65,21 +65,38 @@ export default function InfiniteCarousel({ products }: InfiniteCarouselProps) {
   const animRef = useRef<ReturnType<typeof animate> | null>(null)
 
   useEffect(() => {
-    if (!trackRef.current) return
+    const track = trackRef.current
+    if (!track) return
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReduced) return
 
-    const half = trackRef.current.scrollWidth / 2
+    let started = false
 
-    const controls = animate(mobileX, -half, {
-      duration: 22,
-      ease: 'linear',
-      repeat: Infinity,
-      repeatType: 'loop',
-    })
+    function startAnim() {
+      const half = track!.scrollWidth / 2
+      if (half < 200) return // not rendered yet
+      if (started) return
+      started = true
+      mobileX.set(0)
+      const controls = animate(mobileX, -half, {
+        duration: 22,
+        ease: 'linear',
+        repeat: Infinity,
+        repeatType: 'loop',
+      })
+      animRef.current = controls
+    }
 
-    animRef.current = controls
-    return () => { controls.stop() }
+    // Use ResizeObserver to wait until the track has real width (images loaded)
+    const ro = new ResizeObserver(() => startAnim())
+    ro.observe(track)
+    // Also try immediately in case it's already ready
+    startAnim()
+
+    return () => {
+      ro.disconnect()
+      animRef.current?.stop()
+    }
   }, [mobileX])
 
   const pauseMobile  = useCallback(() => { animRef.current?.pause() }, [])
@@ -89,7 +106,7 @@ export default function InfiniteCarousel({ products }: InfiniteCarouselProps) {
   const doubled = [...products, ...products]
 
   return (
-    <section id="collection" className="py-16 sm:py-24 bg-cream overflow-hidden">
+    <section id="collection" data-nav-theme="light" className="py-16 sm:py-24 bg-cream overflow-hidden">
       {/* Section heading */}
       <div className="px-6 md:px-16 mb-8 sm:mb-12">
         <p className="font-sans font-bold text-moss text-xs tracking-[0.2em] uppercase mb-3 text-center md:text-left">Woven Into Real Life</p>
