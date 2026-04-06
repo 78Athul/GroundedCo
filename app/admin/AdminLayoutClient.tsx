@@ -10,6 +10,13 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
   const router = useRouter()
   const [loading, setLoading] = useState(true)
 
+  // Set body background to olive for admin pages (prevents white bleed)
+  useEffect(() => {
+    if (pathname === '/admin/login') return
+    document.body.style.backgroundColor = 'var(--color-olive, #e9edc9)'
+    return () => { document.body.style.backgroundColor = '' }
+  }, [pathname])
+
   useEffect(() => {
     if (pathname === '/admin/login') {
       return
@@ -33,7 +40,7 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-olive">
         <div className="font-sans text-forest/70">Checking credentials…</div>
       </div>
     )

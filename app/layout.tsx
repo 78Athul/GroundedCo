@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Anton, Heebo, Hind_Siliguri, Geist } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import { Providers } from '@/components/Providers'
 import { AnimatedNav } from '@/components/AnimatedNav'
@@ -48,6 +49,19 @@ export default function RootLayout({
           <div className="noise-overlay" aria-hidden="true" />
         </Providers>
       </body>
+      {/* Google Analytics */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-LXWTBFQXJD"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-LXWTBFQXJD');
+        `}
+      </Script>
     </html>
   )
 }
