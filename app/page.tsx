@@ -9,7 +9,7 @@ import {
   type FeaturedProduct,
 } from '@/data/products'
 
-export const revalidate = 0 // Disable cache temporarily while editing
+export const revalidate = 60 // ISR: refresh every 60 seconds
 
 export default async function Home() {
   let carouselProducts: CarouselProduct[] = []
