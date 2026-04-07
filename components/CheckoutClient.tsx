@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import Script from 'next/script'
 import { useRouter } from 'next/navigation'
 import type { FeaturedProduct } from '@/data/products'
@@ -101,6 +102,23 @@ function AddressStep({
   price: number
 }) {
   const [errors, setErrors] = useState<Partial<Record<keyof CustomerAddress, string>>>({})
+  const [showDetails, setShowDetails] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const backdropDownTarget = useRef<EventTarget | null>(null)
+
+  useEffect(() => { setMounted(true) }, [])
+
+  useEffect(() => {
+    if (!showDetails) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setShowDetails(false) }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prev
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [showDetails])
 
   function set(field: keyof CustomerAddress, val: string) {
     onChange({ ...value, [field]: val })
@@ -121,7 +139,10 @@ function AddressStep({
   }
 
   function handleNext() {
-    if (validate()) onNext()
+    if (validate()) {
+      setShowDetails(false)
+      onNext()
+    }
   }
 
   return (
@@ -149,6 +170,36 @@ function AddressStep({
       <p className="font-sans text-xs font-bold text-deep-obsidian/40 tracking-wider uppercase -mt-3">
         Total: <span className="text-deep-obsidian">{formatINR(price * quantity)}</span>
       </p>
+
+      <button
+        type="button"
+        onClick={() => setShowDetails(true)}
+        className="w-full font-sans text-xs tracking-[0.2em] uppercase bg-deep-obsidian text-wool-white py-4 hover:bg-forest transition-colors duration-300"
+      >
+        Buy Now →
+      </button>
+
+      {showDetails && mounted && createPortal(
+      <div
+        className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4"
+        onPointerDown={(e) => { backdropDownTarget.current = e.target }}
+        onPointerUp={(e) => {
+          if (backdropDownTarget.current === e.currentTarget && e.target === e.currentTarget) {
+            setShowDetails(false)
+          }
+          backdropDownTarget.current = null
+        }}
+      >
+      <div
+        className="bg-wool-white max-w-2xl w-full max-h-[90vh] overflow-y-auto overscroll-contain p-6 sm:p-8 space-y-6 relative"
+        onPointerDown={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={() => setShowDetails(false)}
+          className="absolute top-3 right-4 text-deep-obsidian/50 hover:text-deep-obsidian text-2xl leading-none"
+          aria-label="Close"
+        >×</button>
 
       {/* Contact */}
       <div>
@@ -210,6 +261,10 @@ function AddressStep({
       >
         Continue to Payment →
       </button>
+      </div>
+      </div>,
+      document.body
+      )}
     </div>
   )
 }

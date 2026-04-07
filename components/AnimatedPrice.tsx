@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion'
 
 interface AnimatedPriceProps {
   price: number
@@ -18,8 +18,6 @@ function formatINR(amount: number): string {
 
 export default function AnimatedPrice({ price, discount = 1.3 }: AnimatedPriceProps) {
   const originalPrice = Math.round(price * discount)
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true })
 
   // Animate displayed number from full (original) price → sale price
   const count = useMotionValue(originalPrice)
@@ -27,26 +25,23 @@ export default function AnimatedPrice({ price, discount = 1.3 }: AnimatedPricePr
   const [displayValue, setDisplayValue] = useState(originalPrice)
 
   useEffect(() => {
-    if (!isInView) return
+    const unsub = rounded.on('change', (v) => setDisplayValue(v))
 
     const controls = animate(count, price, {
       duration: 2,
       ease: 'easeOut',
     })
 
-    const unsub = rounded.on('change', (v) => setDisplayValue(v))
-
     return () => {
       controls.stop()
       unsub()
     }
-  }, [isInView, count, rounded, price])
+  }, [count, rounded, price])
 
   const discountPct = Math.round((1 - price / originalPrice) * 100)
 
   return (
     <motion.div
-      ref={ref}
       id="pricing"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +72,7 @@ export default function AnimatedPrice({ price, discount = 1.3 }: AnimatedPricePr
         <span className="font-sans text-deep-obsidian/50 text-sm font-medium">Now</span>
         <motion.span
           className="font-display leading-none tracking-tighter transition-colors duration-500"
-          style={{ fontSize: 'clamp(2rem, 6vw, 3.75rem)', color: isInView ? '#01472e' : '#1a1714' }}
+          style={{ fontSize: 'clamp(2rem, 6vw, 3.75rem)', color: '#01472e' }}
           data-testid="animated-price"
         >
           {formatINR(displayValue)}

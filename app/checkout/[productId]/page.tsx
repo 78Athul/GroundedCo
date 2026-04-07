@@ -110,6 +110,11 @@ export default async function CheckoutPage({
             {/* Animated Price */}
             <AnimatedPrice price={product.price} />
 
+            {/* Interactive client component: tabs + quantity + order */}
+            <div className="mb-8">
+              <CheckoutClient product={product} />
+            </div>
+
             {/* Description */}
             <p className="font-sans text-deep-obsidian/70 text-sm leading-relaxed mb-8">
               {product.description}
@@ -133,9 +138,6 @@ export default async function CheckoutPage({
                 </div>
               ))}
             </div>
-
-            {/* Interactive client component: tabs + quantity + order */}
-            <CheckoutClient product={product} />
           </div>
         </div>
       </section>
