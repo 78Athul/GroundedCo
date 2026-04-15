@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { Home, Leaf } from 'lucide-react'
+import { Home } from 'lucide-react'
 
 import ScrollIndicator from './ScrollIndicator'
 import AnimatedTextCycle from './AnimatedTextCycle'
@@ -17,14 +17,6 @@ const menuItems = [
     gradient:
       'radial-gradient(circle, rgba(154, 204, 98, 0.16) 0%, rgba(141, 163, 90, 0.08) 50%, rgba(74, 85, 30, 0) 100%)',
     iconColor: 'text-sage',
-  },
-  {
-    icon: Leaf,
-    label: 'Enter the Quiet',
-    href: '/enter-the-quiet',
-    gradient:
-      'radial-gradient(circle, rgba(255, 241, 208, 0.2) 0%, rgba(254, 243, 199, 0.1) 50%, rgba(254, 243, 199, 0) 100%)',
-    iconColor: 'text-cream',
   },
 ]
 

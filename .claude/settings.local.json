@@ -32,7 +32,11 @@
       "Bash(find /d/Grounded -type f \\\\\\( -name \"*.ts\" -o -name \"*.tsx\" -o -name \"*.js\" -o -name \"*.jsx\" \\\\\\) ! -path \"*/node_modules/*\" ! -path \"*/.next/*\" ! -path \"*/.git/*\" ! -path \"*/claude-seo/*\" ! -path \"*/package-lock*\" -exec grep -l \"TODO\\\\|FIXME\\\\|HACK\\\\|XXX\" {} \\\\;)",
       "Bash(grep -n \"uettnudsxjyhepzlhryd\\\\.supabase\\\\.co\\\\|supabase\\\\.co\" /d/Grounded/next.config.ts /d/Grounded/lib/supabase/*.ts /d/Grounded/components/admin/ImageUpload.tsx)",
       "Bash(find /d/Grounded/app /d/Grounded/components -type f \\\\\\( -name \"*.ts\" -o -name \"*.tsx\" \\\\\\) -exec grep -l \"console\\\\.log\\\\|console\\\\.debug\\\\|console\\\\.table\" {} \\\\;)",
-      "Bash(ls -la /d/Grounded/tmp*)"
+      "Bash(ls -la /d/Grounded/tmp*)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(curl:*)",
+      "Bash(npx kill-port:*)",
+      "Bash(taskkill //F //IM node.exe)"
     ]
   }
 }
